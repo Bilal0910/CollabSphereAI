@@ -61,7 +61,9 @@ const schema = defineSchema({
     isPublic: v.optional(v.boolean()), // Whether the project is public or private
     tags: v.optional(v.array(v.string())), // Tags for categorizing the project
     projectNumber: v.number(), // A sequential number for the project, unique per user
-  }).index("by_userId", ["userId"]),
+  })
+    .index("by_userId", ["userId"])
+    .index("by_userId_lastModified", ["userId", "lastModified"]),
 
   project_counters: defineTable({
     userId: v.id("users"),

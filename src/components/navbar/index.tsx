@@ -30,12 +30,12 @@ const avatar = me?.image ?? ''
   const tabs: TabProps[] = [
     {
       label: 'Canvas',
-      href: `/dashboard/${me.name}canvas?project=${projectId}`,
+      href: `/dashboard/workspace/${me.name}/canvas?project=${projectId}`,
       icon: <HashIcon className='w-4 h-4' />
     },
     {
       label: 'Style Guide',
-      href: `/dashboard/${me.name}style-guide?project=${projectId}`,
+      href: `/dashboard/workspace/${me.name}/style-guide?project=${projectId}`,
       icon: <LayoutTemplateIcon className='w-4 h-4' />
     },
   ]
