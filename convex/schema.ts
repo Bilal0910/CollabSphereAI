@@ -46,11 +46,11 @@ const schema = defineSchema({
   projects: defineTable({
     name: v.string(), // The name of the project
     userId: v.id("users"),
-    title: v.string(), // The title of the project
+    title: v.optional(v.string()), // The title of the project
     description: v.optional(v.string()), // A brief description of the project
     styleGuide: v.optional(v.string()), // e.g., "minimalist", "vintage", "modern", etc.
-    sketchsData: v.any(), // Raw data for the sketchs, can be a JSON object or any other format you choose
-    canvasData: v.any(), // Raw data for the canvas, can be a JSON object or any other format you choose
+    sketchesData: v.any(), // Raw data for the sketchs, can be a JSON object or any other format you choose
+    canvasData: v.optional(v.any()), // Raw data for the canvas, can be a JSON object or any other format you choose
     viewportData: v.optional(v.any()), // Raw data for the viewport, can be a JSON object or any other format you choose
     generatedDesignData: v.optional(v.any()), // Raw data for the generated design, can be a JSON object or any other format you choose
     thumbnail: v.optional(v.string()), // URL or base64 string for the project thumbnail

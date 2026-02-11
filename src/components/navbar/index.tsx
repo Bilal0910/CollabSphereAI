@@ -9,6 +9,7 @@ import { CircleQuestionMarkIcon, HashIcon, LayoutTemplateIcon, User } from 'luci
 import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { useAppSelector } from '@/redux/store'
+import CreateProject from '../buttons/project'
 
 type TabProps = {
   label: string
@@ -29,12 +30,12 @@ const avatar = me?.image ?? ''
   const tabs: TabProps[] = [
     {
       label: 'Canvas',
-      href: `/dashboard/canvas?project=${projectId}`,
+      href: `/dashboard/${me.name}canvas?project=${projectId}`,
       icon: <HashIcon className='w-4 h-4' />
     },
     {
       label: 'Style Guide',
-      href: `/dashboard/style-guide?project=${projectId}`,
+      href: `/dashboard/${me.name}style-guide?project=${projectId}`,
       icon: <LayoutTemplateIcon className='w-4 h-4' />
     },
   ]
@@ -98,6 +99,7 @@ const avatar = me?.image ?? ''
               <User className='size-5 text-black'/>
             </AvatarFallback>
           </Avatar>
+          {!hasCanvas && !hasStyleGuide && <CreateProject />}
       </div>
     </div>
   )
