@@ -11,7 +11,7 @@ interface AutosaveProjectRequest {
     }
     viewportData?: {
         scale: number,
-        translate: (x: number, y: number)
+        translate: {x: number, y: number}
     }
 }
 
@@ -25,7 +25,7 @@ interface AutosaveProjectResponse {
 
 
 
-export const projectApi = createApi({
+export const ProjectApi = createApi({
     reducerPath: 'projectApi',
     baseQuery: fetchBaseQuery({baseUrl: '/api/project'}),
     tagTypes: ['Project'],
@@ -33,6 +33,12 @@ export const projectApi = createApi({
         autosaveProject: builder.mutation<
         AutosaveProjectResponse,
         AutosaveProjectRequest
-        >({}),
+        >({
+            query: (data) => ({
+                url: '',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 })

@@ -8,6 +8,7 @@ import { api } from '../../../convex/_generated/api'
 import { CircleQuestionMarkIcon, HashIcon, LayoutTemplateIcon, User } from 'lucide-react'
 import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { useAppSelector } from '@/redux/store'
 
 type TabProps = {
   label: string
@@ -19,6 +20,11 @@ const NavBar = () => {
   const params = useSearchParams()
   const pathname = usePathname()
   const projectId = params.get('project')
+
+  const me = useAppSelector((state) => state.profile.user)
+
+  const username = me?.name ?? 'me' // fallback
+const avatar = me?.image ?? ''
 
   const tabs: TabProps[] = [
     {
@@ -44,7 +50,7 @@ const NavBar = () => {
     <div className='grid grid-cols-2 lg:grid-cols-3 p-6 fixed top-0 left-0 right-0 z-50'>
       <div className='flex items-center gap-4'>
         <Link
-          href={`/dashboard/`}
+           href={`/dashboard/${username}`}
           className='w-8 h-8 rounded-full border-3 border-white bg-black flex items-center justify-center'>
           <div className='w-4 h-4 rounded-full bg-white'></div>
         </Link>
@@ -87,7 +93,7 @@ const NavBar = () => {
           <CircleQuestionMarkIcon size={5} className='text-white'/>
           </Button>
           <Avatar className='size-12 ml-2'>
-            <AvatarImage />
+            <AvatarImage src={avatar} />
             <AvatarFallback>
               <User className='size-5 text-black'/>
             </AvatarFallback>

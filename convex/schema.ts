@@ -44,6 +44,7 @@ const schema = defineSchema({
     .index("by_idempotencyKey", ["idempotencyKey"]), // Index by idempotencyKey to prevent duplicates
 
   projects: defineTable({
+    name: v.string(), // The name of the project
     userId: v.id("users"),
     title: v.string(), // The title of the project
     description: v.optional(v.string()), // A brief description of the project
