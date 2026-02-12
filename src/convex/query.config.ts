@@ -37,7 +37,6 @@ export const SubscriptionEntitlementQuery = async () => {
   return { entitlement, profileName: profile?.name };
 };
 
-
 export const ProjectsQuery = async () => {
   const rawProfile = await ProfileQuery();
 
@@ -53,29 +52,36 @@ export const ProjectsQuery = async () => {
   const projects = await preloadQuery(
     api.projects.getUserProjects,
     { userId: profile.id as Id<"users"> },
-    {token: await convexAuthNextjsToken()}
+    { token: await convexAuthNextjsToken() },
   );
 
   return { projects, profile };
+};
 
+export const ProjectQuery = async (projectId: string) => {
+  const rawProfile = await ProfileQuery();
+  const profile = normalizeProfile(
+    rawProfile._valueJSON as unknown as ConvexUserRaw | null, 
+  )
 }
+
 
 export const StyleGuideQuery = async (projectId: string) => {
   const styleGuide = await preloadQuery(
     api.projects.getProjectStyleGuide,
     { projectId: projectId as Id<"projects"> },
-    { token: await convexAuthNextjsToken() }
+    { token: await convexAuthNextjsToken() },
   );
 
-  return {styleGuide}
-}
+  return { styleGuide };
+};
 
 export const MoodBoardImagesQuery = async (projectId: string) => {
   const images = await preloadQuery(
     api.moodboard.getMoodBoardImages,
     { projectId: projectId as Id<"projects"> },
-    { token: await convexAuthNextjsToken() }
+    { token: await convexAuthNextjsToken() },
   );
 
-  return { images }
-}
+  return { images };
+};

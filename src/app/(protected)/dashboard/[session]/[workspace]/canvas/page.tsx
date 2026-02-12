@@ -1,8 +1,29 @@
+import { ProjectQuery } from '@/convex/query.config'
 import React from 'react'
 
-type Props = {}
+interface CanvasPageProps {
+  searchParams: Promise<{ project?: string }>
+}
 
-const Page = (props: Props) => {
+const Page = async ({ searchParams }: CanvasPageProps) => {
+  const params = await searchParams
+  const projectId = params.project
+  if (!projectId) {
+    return (
+      <div className='w-full h-screen flex items-center justify-center'>
+        <p className='text-muted-foreground'>No project selected</p>
+      </div>
+    )
+  }
+
+  const { project, profile } = await ProjectQuery(projectId)
+  if (!projectId) {
+    return (
+      <div className='w-full h-screen flex items-center justify-center'>
+        <p className='text-muted-foreground'>Authentication required</p>
+      </div>
+    )
+  }
   return (
     <div>Page</div>
   )
