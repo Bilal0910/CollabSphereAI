@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { useInfinteCanvas } from '@/hooks/use-canvas'
+import { useInfiniteCanvas } from '@/hooks/use-canvas'
 import { cn } from '@/lib/utils'
 import { Tool } from '@/redux/slice/shapes'
 import { ArrowRight, Circle, Eraser, Hash, Minus, MousePointer2, Pencil, Square, Type } from 'lucide-react'
@@ -69,7 +69,7 @@ const tools: Array<{
     ]
 
 const ToolBarShapes = () => {
-    const {selectTool, currentTool} = useInfinteCanvas()
+    const {selectTool, currentTool} = useInfiniteCanvas()
     return (
         <div className='col-span-1 flex justify-center items-center'>
             <div className='flex items-center backdrop-blur-xl backdrop-[url(#displacementfilter)] bg-white/[0.08]

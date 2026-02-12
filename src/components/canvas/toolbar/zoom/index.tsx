@@ -1,13 +1,13 @@
 'use client'
 import { Button } from '@/components/ui/button';
-import { useInfinteCanvas } from '@/hooks/use-canvas';
+import { useInfiniteCanvas } from '@/hooks/use-canvas';
 import { setScale } from '@/redux/slice/viewport';
 import { ZoomIn, ZoomOut } from 'lucide-react';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 
 const ZoomBar = () => {
-    const { viewport } = useInfinteCanvas()
+    const { viewport } = useInfiniteCanvas()
     const dispatch = useDispatch()
     const handleZoomOut = () => {
         const newScale = Math.max(viewport.scale / 1.2, viewport.minScale);

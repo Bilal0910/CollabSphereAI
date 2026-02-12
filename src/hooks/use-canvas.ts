@@ -43,7 +43,7 @@ interface DraftShape {
   currentWorld: Point;
 }
 
-export const useInfinteCanvas = () => {
+export const useInfiniteCanvas = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const viewport = useAppSelector((s) => s.viewport);

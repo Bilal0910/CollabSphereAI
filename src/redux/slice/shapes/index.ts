@@ -78,6 +78,12 @@ export interface TextShape extends BaseShape {
   lineHeight: number;
   letterSpacing: number;
   textTransform: "none" | "uppercase" | "lowercase" | "capitalize";
+  // ✅ ADD THESE
+  paddingTop: number;
+  paddingBottom: number;
+  paddingLeft: number;
+  paddingRight: number;
+  paragraphSpacing: number;
 }
 
 export interface GeneratedUIShape extends BaseShape {
@@ -252,6 +258,11 @@ const makeText = (p: {
   lineHeight?: number;
   letterSpacing?: number;
   textTransform?: "none" | "uppercase" | "lowercase" | "capitalize";
+  paddingTop?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+  paragraphSpacing?: number;
   stroke?: string;
   strokeWidth?: number;
   fill?: string | null;
@@ -270,6 +281,12 @@ const makeText = (p: {
   lineHeight: p.lineHeight ?? 1.2,
   letterSpacing: p.letterSpacing ?? 0,
   textTransform: p.textTransform ?? "none",
+
+  paddingTop: p.paddingTop ?? 12,
+  paddingBottom: p.paddingBottom ?? 12,
+  paddingLeft: p.paddingLeft ?? 12,
+  paddingRight: p.paddingRight ?? 12,
+  paragraphSpacing: p.paragraphSpacing ?? 0,
   stroke: p.stroke ?? DEFAULTS.stroke,
   strokeWidth: p.strokeWidth ?? DEFAULTS.strokeWidth,
   fill: p.fill ?? "#ffffff",
