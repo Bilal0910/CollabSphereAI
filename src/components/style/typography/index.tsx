@@ -40,7 +40,7 @@ const StyleGuideTypography = ({ typographyGuide }: Props) => {
 
                                             {style.description && (
                                                 <p className='text-sm text-muted-foreground'>
-                                                    {style.style.description}
+                                                    {style.description}
                                                 </p>
                                             )}
                                         </div>

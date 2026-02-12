@@ -118,8 +118,11 @@ export const getProjectStyleGuide = query({
     if (project.userId !== userId && !project.isPublic)
       throw new Error("Access denied");
 
-    return project.styleGuide ? JSON.parse(project.styleGuide) : null;
+    try {
+      return project.styleGuide ? JSON.parse(project.styleGuide) : null;
+    } catch (error) {
+      console.error("Error parsing style guide:", error);
+      return null;
+    }
   },
 });
-
-
