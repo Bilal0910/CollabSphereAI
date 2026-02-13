@@ -1,5 +1,5 @@
 import { getAuthUserId } from "@convex-dev/auth/server";
-import { v } from "convex/values";
+import { convexToJson, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 export const getProject = query({
@@ -124,5 +124,29 @@ export const getProjectStyleGuide = query({
       console.error("Error parsing style guide:", error);
       return null;
     }
+  },
+});
+
+export const updateProjectSkethces = mutation({
+  args: {
+    projectId: v.id("projects"),
+    sketchesData: v.any(),
+    viewportData: v.optional(v.any()),
+  },
+  handler: async (ctx, { projectId, sketchesData, viewportData }) => {
+    const project = await ctx.db.get(projectId);
+    if (!project) throw new Error("Project not found");
+    const updateData: any = {
+      sketchesData,
+      lastModified: Date.now(),
+    };
+
+    if (viewportData) {
+      updateData.viewportData = viewportData;
+    }
+
+    await ctx.db.patch(projectId, updateData);
+    console.log("Project updated with ID:", projectId);
+    return { succes: true };
   },
 });

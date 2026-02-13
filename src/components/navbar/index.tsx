@@ -10,6 +10,7 @@ import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { useAppSelector } from '@/redux/store'
 import CreateProject from '../buttons/project'
+import Autosave from '../canvas/autosave'
 
 type TabProps = {
   label: string
@@ -25,7 +26,7 @@ const NavBar = () => {
   const me = useAppSelector((state) => state.profile.user)
 
   const username = me?.name ?? 'me' // fallback
-const avatar = me?.image ?? ''
+  const avatar = me?.image ?? ''
 
   const tabs: TabProps[] = [
     {
@@ -47,11 +48,15 @@ const avatar = me?.image ?? ''
   const hasCanvas = pathname.includes('canvas')
   const hasStyleGuide = pathname.includes('style-guide')
 
+  const creditBalance = useQuery(api.subscription.getCreditsBalance, {
+    userId: me.id as Id<'users'>
+  })
+
   return (
     <div className='grid grid-cols-2 lg:grid-cols-3 p-6 fixed top-0 left-0 right-0 z-50'>
       <div className='flex items-center gap-4'>
         <Link
-           href={`/dashboard/workspace/${username}`}
+          href={`/dashboard/workspace/${username}`}
           className='w-8 h-8 rounded-full border-3 border-white bg-black flex items-center justify-center'>
           <div className='w-4 h-4 rounded-full bg-white'></div>
         </Link>
@@ -86,20 +91,21 @@ const avatar = me?.image ?? ''
       </div>
 
       <div className='flex items-center justify-end gap-4'>
-        <span className='text-sm text-white/50'>TODO: credits</span>
+        <span className='text-sm text-white/50'>{creditBalance} credits</span>
         <Button
-        variant="secondary"
-        className='rounded-full h-12 w-12 flex items-center justify-center backdrop-blur-xl bg-white/[0.08]
+          variant="secondary"
+          className='rounded-full h-12 w-12 flex items-center justify-center backdrop-blur-xl bg-white/[0.08]
          border border-white/[0.12] saturate-150 hover:bg-white/[0.12] transition'>
-          <CircleQuestionMarkIcon size={5} className='text-white'/>
-          </Button>
-          <Avatar className='size-12 ml-2'>
-            <AvatarImage src={avatar} />
-            <AvatarFallback>
-              <User className='size-5 text-black'/>
-            </AvatarFallback>
-          </Avatar>
-          {!hasCanvas && !hasStyleGuide && <CreateProject />}
+          <CircleQuestionMarkIcon size={5} className='text-white' />
+        </Button>
+        <Avatar className='size-12 ml-2'>
+          <AvatarImage src={avatar} />
+          <AvatarFallback>
+            <User className='size-5 text-black' />
+          </AvatarFallback>
+        </Avatar>
+        {hasCanvas && <Autosave />}
+        {!hasCanvas && !hasStyleGuide && <CreateProject />}
       </div>
     </div>
   )

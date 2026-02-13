@@ -884,3 +884,8 @@ export const useInfiniteCanvas = () => {
     setIsSidebarOpen,
   };
 };
+
+
+
+
+

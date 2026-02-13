@@ -1,7 +1,7 @@
 import { FrameShape } from "@/redux/slice/shapes";
-// import { LiquidGlassButton } from "@/components/buttons/liquid-glass";
+import { LiquidGlassButton } from "@/components/buttons/liquid-glass";
 import { Brush, Palette } from "lucide-react";
-// import { useFrame } from "@/hooks/use-canvas";
+import { useFrame } from "@/hooks/use-mobile";
 
 export const Frame = ({
   shape,
@@ -10,7 +10,7 @@ export const Frame = ({
   shape: FrameShape;
   toggleInspiration: () => void;
 }) => {
-  // const { isGenerating, handleGenerateDesign } = useFrame(shape);
+  const { isGenerating, handleGenerateDesign } = useFrame(shape);
 
   return (
     <>

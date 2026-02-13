@@ -9,8 +9,7 @@ const Page = async () => {
 
     // If user has NO entitlement → billing
   if (!entitlement._valueJSON) {
-    // redirect(`/billing/${combinedSlug(profileName!)}`);
-    redirect(`/dashboard/${combinedSlug(profileName!)}`);
+    redirect(`/billing/${combinedSlug(profileName!)}`);
   }
 
   // If user has entitlement → dashboard/username
